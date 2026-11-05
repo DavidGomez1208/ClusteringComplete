@@ -33,23 +33,14 @@ silhoutte, davis = evaluate(X,labels)
 st.write('Silhouette',silhoutte)
 st.write('Davis Index',davis)
 
-if len(features) == 2:
-    fig, ax = plt.subplots()
-    ax.scatter(df[features[0]], df[features[1]], c=labels)
-    ax.set_xlabel(features[0])
-    ax.set_ylabel(features[1])
-    st.pyplot(fig)
-else:
-    st.info('Select exactly 2 features for visualization. ')
-
 model_type = st.selectbox("Select the model ", ["Agglomerative", "DBSCAN"])
 
 if model_type == "Agglomerative":
-    labels = clustering(x, n_clusters, linkage)
+    labels = clustering(X, n_cluster, linkage)
     df['Cluster'] = labels
     st.subheader("Clustering Results")
     st.dataframe(df)
-    silhouette, davies_bouldin = evaluate(x, labels)
+    silhouette, davies_bouldin = evaluate(X, labels)
     st.write(f"Silhouette Score: {silhouette}")
     st.write(f"Davies-Bouldin Score: {davies_bouldin}")
 
@@ -66,3 +57,13 @@ elif model_type == "DBSCAN":
 
 else:
     st.warning("Please select a valid model type.")
+
+
+if len(features) == 2:
+    fig, ax = plt.subplots()
+    ax.scatter(df[features[0]], df[features[1]], c=labels)
+    ax.set_xlabel(features[0])
+    ax.set_ylabel(features[1])
+    st.pyplot(fig)
+else:
+    st.info('Select exactly 2 features for visualization. ')
