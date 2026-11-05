@@ -47,7 +47,7 @@ if model_type == "Agglomerative":
 elif model_type == "DBSCAN":
     eps = st.slider("Select epsilon value", min_value=0.1, max_value=5.0, value=0.5, step=0.1)
     min_samples = st.slider("Select minimum samples", min_value=1, max_value=10, value=5)
-    labels = model_selection(x, model_type="DBSCAN", eps=eps, min_samples=min_samples)
+    labels = model_type(X, model_type="DBSCAN", eps=eps, min_samples=min_samples)
     df['Cluster'] = labels
     st.subheader("Clustering Results")
     st.dataframe(df)
